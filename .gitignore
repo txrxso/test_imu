@@ -1,3 +1,7 @@
 .pio/*
 .vscode/*
 
+include/mqtt_config.h
+include/secrets.h
+include/certs.h
+python/test_configs/mqtt_broker.yaml
