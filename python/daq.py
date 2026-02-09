@@ -112,7 +112,11 @@ def serial_mode(port, baud=115200):
         print("pyserial not installed. Run: pip install pyserial")
         return 1
     
-    out_file = f"imu_log_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
+    # Ensure test_data directory exists
+    test_data_dir = os.path.join(os.path.dirname(__file__), "test_data")
+    os.makedirs(test_data_dir, exist_ok=True)
+    
+    out_file = os.path.join(test_data_dir, f"imu_log_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv")
     
     with open(out_file, "w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=["ts", "ax", "ay", "az", "gx", "gy", "gz"])
@@ -174,7 +178,11 @@ def mqtt_mode():
     username = config.get('username', '')
     password = config.get('password', '')
     
-    out_file = f"imu_log_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
+    # Ensure test_data directory exists
+    test_data_dir = os.path.join(os.path.dirname(__file__), "test_data")
+    os.makedirs(test_data_dir, exist_ok=True)
+    
+    out_file = os.path.join(test_data_dir, f"imu_log_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv")
     
     with open(out_file, "w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=["ts", "ax", "ay", "az", "gx", "gy", "gz"])
