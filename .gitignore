@@ -1,5 +1,6 @@
 .pio/*
 .vscode/*
+python/test_imu_venv/
 
 include/mqtt_config.h
 include/secrets.h
