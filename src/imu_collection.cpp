@@ -125,6 +125,6 @@ void loop() {
             mqttClient.publish(MQTT_TOPIC_IMU_TEST, payload);
         }
 
-
+    }
 
 }
