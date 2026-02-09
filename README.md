@@ -2,27 +2,9 @@
 For collecting IMU values for a variety of scenarios as part of threshold verification.
 
 ## SET UP 
-1. `touch python/test_configs/mqtt_broker.yaml`
-2. Put the following credentials in the .yaml file. This is used by the Python script to connect to the appropriate topic on the broker for data collection and analysis.
+1. Set up and activate your environment, run `pip install -r python/requirements.txt`. 
 
-```yaml
-public_broker:
-  host: broker.hivemq.com
-  port: 1883
-
-private_broker:
-  host: fe26426fbe64463790fc2792777c8189.s1.eu.hivemq.cloud
-  port: 8883
-  username: <PUT CREDS HERE>
-  password: <PUT CREDS HERE>
-
-topics:
-  imu: igen430/shh/imu_test
-  alerts: igen430/shh/alerts/workerA
-
-```
-
-3. Create the credentials file for the ESP32: <br>`touch include/secrets.h` <br>
+2. Create the credentials file for the ESP32: <br>`touch include/secrets.h` <br>
 Include the following:
 
 ```c++
@@ -41,7 +23,7 @@ Include the following:
 
 #endif 
 ```
-4. Add the appropriate Root CA certificate. 
+3. Add the appropriate Root CA certificate. 
 
 To connect to `fe26426fbe64463790fc2792777c8189.s1.eu.hivemq.cloud` on port `8883` (TLS only), we need to set the Root CA certificate. <br>
 In bash, run `touch include/certs.h`. <br>
@@ -59,7 +41,7 @@ const char* root_ca = <PASTE CERTIFICATE HERE>;
 ```
 
 
-5. Add the required MQTT configuration. <br> In bash, run `touch include/mqtt_config.h`. Add the following: 
+4. Add the required MQTT configuration. <br> In bash, run `touch include/mqtt_config.h`. Add the following: 
 
 ```c++
 #ifndef MQTT_CONFIG_H
