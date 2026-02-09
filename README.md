@@ -83,6 +83,54 @@ const char* MQTT_PSWD = ""; // put pswd here
 ```
 
 
+## USAGE
+
+### 1. Configure Logging Mode
+
+In `src/imu_collection.cpp`, set the logging mode:
+```cpp
+#define LOGGING_MODE 1 // 0: no logging, 1: log to Serial, 2: log to MQTT
+```
+
+### 2. Flash the ESP32
+
+Using PlatformIO, build and upload the firmware:
+```bash
+pio run --target upload
+```
+
+### 3. Run the Data Acquisition Script
+
+The Python script automatically detects the logging mode from `imu_collection.cpp` and logs accordingly.
+
+**For Serial Mode (LOGGING_MODE=1):**
+```bash
+python python/daq.py COM3
+```
+Replace `COM3` with your serial port (e.g., `/dev/ttyUSB0` on Linux).
+
+**For MQTT Mode (LOGGING_MODE=2):**
+```bash
+python python/daq.py
+```
+MQTT credentials are read automatically from `include/mqtt_config.h`.
+
+### 4. Collect Data
+
+The script will:
+- Create a timestamped CSV file (e.g., `imu_log_20260208_143052.csv`)
+- Display IMU data in real-time
+- Press `Ctrl+C` to stop logging
+
+### 5. View Results
+
+When you stop logging, the script automatically generates plots showing:
+- Accelerometer data (ax, ay, az)
+- Gyroscope data (gx, gy, gz)
+
+Plots are saved as PNG files alongside the CSV data.
+
+
 ## Sample scenarios we want to collect data for and plot: 
 
 ### i) Dropping device from a height 
