@@ -83,7 +83,7 @@ void loop() {
     }
 
     unsigned long now = millis();
-    if (now - lastPublishMs >= 100) {
+    if (now - lastPublishMs >= 10) {
         lastPublishMs = now;
 
         sensors_event_t accel, gyro, temp;
