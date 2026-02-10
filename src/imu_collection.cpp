@@ -10,7 +10,7 @@
 #include <PubSubClient.h> // MQTT client
 
 
-#define LOGGING_MODE 1 // 0: no logging, 1: log to Serial, 2: log to MQTT
+#define LOGGING_MODE 2 // 0: no logging, 1: log to Serial, 2: log to MQTT
 
 
 WiFiClientSecure wifiClient;
@@ -37,7 +37,8 @@ bool connectToMQTT(bool enableTLS = true) {
 
 void connectToWifi() { 
     WiFi.mode(WIFI_STA);
-    WiFi.begin(HOTSPOT_SSID, HOTSPOT_PSWD);
+    //WiFi.begin(HOTSPOT_SSID, HOTSPOT_PSWD);
+    WiFi.begin(WIFI_SSID, WPA2_AUTH_PEAP, WIFI_EAP_ID, WIFI_USER, WIFI_PASSWORD);
     Serial.print("Connecting to WiFi");
     while (WiFi.status() != WL_CONNECTED) {
         delay(500);
