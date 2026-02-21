@@ -1,0 +1,6 @@
+Alert Summary
+============================================================
+> 10g: 0 acc alerts, 0 gyro alerts
+> 6g: 0 acc alerts, 0 gyro alerts
+> 4g: 2 acc alerts, 0 gyro alerts
+> 3g: 7 acc alerts, 0 gyro alerts
