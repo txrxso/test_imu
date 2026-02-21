@@ -179,7 +179,7 @@ def mqtt_mode():
     password = config.get('password', '')
     
     # Ensure test_data directory exists
-    test_data_dir = os.path.join(os.path.dirname(__file__), "test_data")
+    test_data_dir = os.path.join(os.path.dirname(__file__), "test_data", "raw")
     os.makedirs(test_data_dir, exist_ok=True)
     
     out_file = os.path.join(test_data_dir, f"imu_log_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv")
