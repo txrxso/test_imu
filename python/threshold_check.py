@@ -18,11 +18,19 @@ if not os.path.exists(SUMMARY_DIR):
 if not os.path.exists(RESULTANT_PLOTS_DIR):
     os.makedirs(RESULTANT_PLOTS_DIR, exist_ok=True)
 
-ALERT_THRESHOLDS = [
+ACCELERATION_ALERT_LEVELS = [
     {"label": "> 10g",  "value": 10 * G, "color": "#e63946", "alpha": 0.25, "linestyle": "--"},
     {"label": "> 6g",   "value":  6 * G, "color": "#f4a261", "alpha": 0.25, "linestyle": "-."},
     {"label": "> 4g",  "value":  4 * G, "color": "#aa3b9d", "alpha": 0.25, "linestyle": "--"},
     {"label": "> 3g",  "value":  3 * G, "color": "#3b62aa", "alpha": 0.25, "linestyle": "--"}
+]
+
+GYRO_ALERT_LEVELS = [
+    {"label": "> 800 deg/s", "value": np.deg2rad(800), "color": "#1F945F", "alpha": 0.25, "linestyle": "--"},
+    {"label": "> 500 deg/s", "value": np.deg2rad(500), "color": "#e63946", "alpha": 0.25, "linestyle": "--"},
+    {"label": "> 300 deg/s", "value": np.deg2rad(300), "color": "#f4a261", "alpha": 0.25, "linestyle": "-."},
+    {"label": "> 200 deg/s", "value": np.deg2rad(200), "color": "#aa3b9d", "alpha": 0.25, "linestyle": "--"},
+    {"label": "> 100 deg/s", "value": np.deg2rad(100), "color": "#3b62aa", "alpha": 0.25, "linestyle": "--"}
 ]
 
 # --- HELPERS ---
@@ -53,7 +61,7 @@ def plot_with_alerts_thresholds(df, plot_basename):
 
     # --- acceleration plot --- 
     ax1.plot(ts, acc, linewidth=1, label='Acc Resultant')
-    for thr in ALERT_THRESHOLDS:
+    for thr in ACCELERATION_ALERT_LEVELS:
         ax1.axhline(thr['value'], color=thr['color'], linestyle=thr['linestyle'],
                     linewidth=1.2, label=thr['label'])
         ax1.fill_between(ts, thr['value'], acc,
@@ -66,7 +74,7 @@ def plot_with_alerts_thresholds(df, plot_basename):
 
     # --- gyroscope plot ---
     ax2.plot(ts, gyro, linewidth=1, label='Gyro Resultant')
-    for thr in ALERT_THRESHOLDS:
+    for thr in GYRO_ALERT_LEVELS:
         ax2.axhline(thr['value'], color=thr['color'], linestyle=thr['linestyle'],
                     linewidth=1.2, label=thr['label'])
         ax2.fill_between(ts, thr['value'], gyro,
@@ -95,10 +103,14 @@ def print_alert_summary(df, file_basename):
     lines.append(f"Alert Summary")
     lines.append("=" * 60)
 
-    for thr in ALERT_THRESHOLDS: 
+    for thr in ACCELERATION_ALERT_LEVELS:
         acc_alerts = np.sum(acc > thr['value'])
+        lines.append(f"  {thr['label']}: {acc_alerts} samples")
+
+    lines.append("\nGyroscope:")
+    for thr in GYRO_ALERT_LEVELS:
         gyro_alerts = np.sum(gyro > thr['value'])
-        lines.append(f"{thr['label']}: {acc_alerts} acc alerts, {gyro_alerts} gyro alerts")
+        lines.append(f"  {thr['label']}: {gyro_alerts} samples")
 
     out_path = os.path.join(SUMMARY_DIR,
                             file_basename.replace('.csv', '_summary.txt')) 

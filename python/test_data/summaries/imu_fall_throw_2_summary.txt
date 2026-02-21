@@ -1,6 +1,13 @@
 Alert Summary
 ============================================================
-> 10g: 1 acc alerts, 0 gyro alerts
-> 6g: 1 acc alerts, 0 gyro alerts
-> 4g: 1 acc alerts, 0 gyro alerts
-> 3g: 1 acc alerts, 0 gyro alerts
+  > 10g: 1 samples
+  > 6g: 1 samples
+  > 4g: 1 samples
+  > 3g: 1 samples
+
+Gyroscope:
+  > 800 deg/s: 2 samples
+  > 500 deg/s: 8 samples
+  > 300 deg/s: 14 samples
+  > 200 deg/s: 19 samples
+  > 100 deg/s: 26 samples
