@@ -119,7 +119,9 @@ def serial_mode(port, baud=115200):
     out_file = os.path.join(test_data_dir, f"imu_log_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv")
     
     with open(out_file, "w", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=["ts", "ax", "ay", "az", "gx", "gy", "gz"])
+        writer = csv.DictWriter(f, fieldnames=["ts", "ax", "ay", "az", "gx", "gy", "gz", 
+                                                "r_acc", "r_gyro", "event", "state", "jerk",
+                                                "freefall", "horizontal", "motionless"])
         writer.writeheader()
         
         def handle_exit(_signum, _frame):
@@ -150,6 +152,14 @@ def serial_mode(port, baud=115200):
                     "gx": data.get("gx"),
                     "gy": data.get("gy"),
                     "gz": data.get("gz"),
+                    "r_acc": data.get("r_acc"),
+                    "r_gyro": data.get("r_gyro"),
+                    "event": data.get("event"),
+                    "state": data.get("state"),
+                    "jerk": data.get("jerk"),
+                    "freefall": data.get("freefall"),
+                    "horizontal": data.get("horizontal"),
+                    "motionless": data.get("motionless"),
                 })
                 f.flush()
                 print(line)
@@ -185,7 +195,9 @@ def mqtt_mode():
     out_file = os.path.join(test_data_dir, f"imu_log_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv")
     
     with open(out_file, "w", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=["ts", "ax", "ay", "az", "gx", "gy", "gz"])
+        writer = csv.DictWriter(f, fieldnames=["ts", "ax", "ay", "az", "gx", "gy", "gz",
+                                                "r_acc", "r_gyro", "event", "state", "jerk",
+                                                "freefall", "horizontal", "motionless"])
         writer.writeheader()
         
         def handle_exit(_signum, _frame):
@@ -224,6 +236,14 @@ def mqtt_mode():
                     "gx": data.get("gx"),
                     "gy": data.get("gy"),
                     "gz": data.get("gz"),
+                    "r_acc": data.get("r_acc"),
+                    "r_gyro": data.get("r_gyro"),
+                    "event": data.get("event"),
+                    "state": data.get("state"),
+                    "jerk": data.get("jerk"),
+                    "freefall": data.get("freefall"),
+                    "horizontal": data.get("horizontal"),
+                    "motionless": data.get("motionless"),
                 })
                 f.flush()
                 print(payload)
