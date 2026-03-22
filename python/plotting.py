@@ -165,9 +165,11 @@ if __name__ == "__main__":
         # Create 1x5 grid plot for each file
         fig = plot_all_data(df, csv_file)
         
+        # Save the figure BEFORE closing it
+        output_path = os.path.join(FILE_DIRECTORY, f'{os.path.basename(csv_file).replace(".csv", ".png")}')
+        plt.savefig(output_path, dpi=300)
+        
         plt.show(block=False)  
         plt.pause(2)           
-        plt.close()            
-        
-        plt.savefig(f'{os.path.basename(csv_file).replace(".csv", ".png")}', dpi=300)
+        plt.close()
 
