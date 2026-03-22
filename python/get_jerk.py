@@ -4,7 +4,7 @@ import os
 import matplotlib.pyplot as plt
 
 # CSV format: ts,ax,ay,az,gx,gy,gz
-FILEPATH = r'C:\Users\teres\Projects\test_imu\python\test_data\raw\tracy_fall_1.csv'
+FILEPATH = r'C:\Users\teres\Projects\test_imu\python\test_data\raw\trip_fall.csv'
 
 def calculate_jerk(df): 
     """
