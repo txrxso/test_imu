@@ -111,12 +111,3 @@ When you stop logging, the script automatically generates plots showing:
 - Gyroscope data (gx, gy, gz)
 
 Plots are saved as PNG files alongside the CSV data.
-
-
-## Sample scenarios we want to collect data for and plot: 
-
-### i) Dropping device from a height 
-### ii) Shaking device vigorously
-### iii) Walking around at normal pace with it on head
-### iv) Running with it on head
-### v) Turning head quickly from side to side
